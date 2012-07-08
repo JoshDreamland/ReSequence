@@ -6,33 +6,53 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+/**
+ * @author Josh Ventura
+ * Class to render the entirety of a wave for the user to view.
+ */
 public class WaveRenderPane extends JPanel
 {
+	/** Shut up, ECJ. */
 	private static final long serialVersionUID = 1L;
+	/** The object whose wave data is being depicted. */
 	protected WaveHolder bufferOwner;
+	/** Cached wave data to render. */
 	protected byte[] cache = null;
 
+	/**
+	 * @author Josh Ventura
+	 * Interface for any object which can contain a wave to be displayed.
+	 */
 	public static interface WaveHolder
 	{
+		/** @return Return the sound bytes of the wave data contained. */
 		byte[] getWaveData();
 	}
 
+	/**
+	 * Construct with a WaveHolder to answer us.
+	 * @param bufferOwner The object which can be polled for wave data.
+	 */
 	public WaveRenderPane(WaveHolder bufferOwner)
 	{
 		this.bufferOwner = bufferOwner;
 		cache = bufferOwner.getWaveData();
 	}
 
+	/** Kill the cached wavedata, forcing renew. */
 	public void invalidate()
 	{
 		cache = null;
 	}
 
+	/** Refresh the wave data by polling the source again. */
 	public void renew()
 	{
 		cache = bufferOwner.getWaveData();
 	}
 
+	/** Return how much space we need to render our wave. */
+	@Override
 	public Dimension getPreferredSize()
 	{
 		if (cache == null)
@@ -43,6 +63,8 @@ public class WaveRenderPane extends JPanel
 		return new Dimension(cache.length,276);
 	}
 
+	/** Override to render our waveform. */
+	@Override
 	public void paint(Graphics g)
 	{
 		super.paint(g);

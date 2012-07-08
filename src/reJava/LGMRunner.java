@@ -8,7 +8,10 @@ import seqGUI.MainFrame;
 /** LGM Plugin interface. Program entry point is at constructor. */
 public class LGMRunner implements ActionListener//,SubframeListener
 {
+	/** The frame to use in LateralGM's interface. */
 	MainFrame f;
+	/** Whether we are requesting a subframe in LateralGM. */
+	boolean needsubframe = false;
 
 	/** Constructor; specific to our class */
 	public LGMRunner()
@@ -38,6 +41,6 @@ public class LGMRunner implements ActionListener//,SubframeListener
 	 */
 	public boolean subframeRequested(/*Resource<?,?> res, ResNode node*/)
 	{
-		return false;
+		return needsubframe;
 	}
 }

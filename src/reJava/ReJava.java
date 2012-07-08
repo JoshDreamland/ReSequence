@@ -14,10 +14,6 @@ import javax.swing.KeyStroke;
 /** Class offering lazy-man wrappers to swing. */
 public final class ReJava
 {
-	private ReJava()
-	{
-	}
-
 	/**
 	 * @param items A string containing item names for the menu, separated by a pipe symbol (|).
 	 * @param label The label to give to the menu.

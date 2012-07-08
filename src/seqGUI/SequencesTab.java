@@ -15,16 +15,26 @@ import seqBackend.Note;
 import waveFunc.WaveRenderPane;
 import waveFunc.WaveRenderPane.WaveHolder;
 
+/**
+ * @author Josh Ventura
+ * Tab containing the finished sequence, or complete song.
+ */
 public class SequencesTab extends JPanel implements ActionListener,WaveHolder
 {
+	/** Shut up, ECJ. */
 	private static final long serialVersionUID = 1L;
 
+	/** Box to select the pattern to place. */
 	JComboBox patternBox;
+	/** Button to play the sequence. */
 	JButton play;
 
+	/** Pre-rendered version of our song. */
 	public byte[] buffer;
+	/** The sample rate of our song. */
 	public final int sps = 30000;
 
+	/** Construct default, building the UI. */
 	public SequencesTab()
 	{
 		super(new BorderLayout());
@@ -56,11 +66,15 @@ public class SequencesTab extends JPanel implements ActionListener,WaveHolder
 		buffer = Note.parseSong(song,sps);
 	}
 
+	/** Return our wave data buffer.
+	 * @return The sound bytes of our complete song. */
 	public byte[] getWaveData()
 	{
 		return buffer;
 	}
 
+	/** One of our buttons was pressed, or whatever.
+	 * @param e Info about the event that transpired. */
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -77,11 +91,23 @@ public class SequencesTab extends JPanel implements ActionListener,WaveHolder
 		}
 	}
 
+	/**
+	 * Class representing a scope.
+	 * @author Josh Ventura
+	 */
 	static class Tone
 	{
-		int freq, dur, vol;
+		/** The frequency of this tone, in Hz. */
+		int freq;
+		/** The duration of this tone, in milliseconds. */
+		int dur;
+		/** The volume of this tone, in range of a byte. */
+		int vol;
 
-		/** frequency (e.g. 400), duration in ms, volume (0-128) */
+		/** 
+		 * @param freq Frequency in Hz. (e.g. 400)
+		 * @param dur Duration in milliseconds.
+		 * @param vol Volume of this note, ranging from 0-128. */
 		public Tone(int freq, int dur, int vol)
 		{
 			this.freq = freq;

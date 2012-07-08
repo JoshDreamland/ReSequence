@@ -11,6 +11,7 @@ import java.util.Map;
 /** Information about a note to be played. */
 public class Note
 {
+	/** Map of notes by their common name. */
 	protected static Map<String,Double> notes = new HashMap<String,Double>();
 
 	/** Note indicating */
@@ -192,7 +193,7 @@ public class Note
 		}
 		catch (IOException e)
 		{
-			//This will never happen unless we change the BAOS to something else.
+			// This will never happen unless we change the BAOS to something else.
 			e.printStackTrace();
 		}
 		return baos.toByteArray();

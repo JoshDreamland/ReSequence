@@ -14,9 +14,14 @@ import javax.swing.event.ChangeListener;
 /** Widget class displayed as a spin box and slider. */
 public class JSpinSlide extends JPanel implements ChangeListener,MouseMotionListener
 {
+	/** Shut up, ECJ. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The slider part of this component. */
 	protected JSlider slider;
+	/** A spinner model to restrict our spinner's bounds and set its increments. */
 	protected SpinnerNumberModel spinModel;
+	/** True if we should snap to increments. */
 	protected boolean snap = false;
 
 	/** Default constructor */
@@ -70,8 +75,10 @@ public class JSpinSlide extends JPanel implements ChangeListener,MouseMotionList
 		listenerList.add(ChangeListener.class,l);
 	}
 
+	/** Our state change event to fire. */
 	protected transient ChangeEvent changeEvent = null;
 
+	/** Fire a notification that one of our sub-widgets was modified. */
 	protected void fireStateChanged()
 	{
 		Object[] listeners = listenerList.getListenerList();
@@ -99,6 +106,7 @@ public class JSpinSlide extends JPanel implements ChangeListener,MouseMotionList
 		slider.setMajorTickSpacing(spacing);
 	}
 
+	/** True if our state is in the process of being changed; sort of a synchronization replacement */
 	private boolean changing = false;
 
 	/**
